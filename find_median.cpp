@@ -4,8 +4,7 @@
 using namespace std;
 
 int findMedian(vector<int> arr) {
-	long n = arr.size();
-	long m = n/2;
+	size_t m = arr.size()/2;
 	sort(arr.begin(), arr.end());
 	return arr[m];
 }

@@ -5,13 +5,24 @@ using namespace std;
 
 void minimumBribes(vector<int> q) {
     long bribes = 0;
-    for (int i = 0; i < q.size(); i++) {
-        if (q[i] > i+3) {
-            cout << "Too chaotic" << endl;
-            return;
+    for (int i = q.size()-1; i >= 0; i--) {
+        if (q[i] == i+1) continue;
+        int temp = q[i];
+        if (q[i-1] == i+1) {
+            q[i] = q[i-1];
+            q[i-1] = temp;
+            bribes++;
+        } else {
+            if (q[i-2] == i+1) {
+                q[i] = q[i-2];
+                q[i-2] = q[i-1];
+                q[i-1] = temp;
+                bribes += 2;
+            } else {
+                cout << "Too chaotic" << endl;
+                return;
+            }
         }
-        // TODO: check bribe count
-        if (q[i] > i+1) bribes += (q[i] - i-1);
     }
     cout << bribes << endl;
 }

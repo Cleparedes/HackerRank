@@ -4,16 +4,18 @@
 using namespace std;
 
 string gridChallenge(vector<string> grid) {
-    // TODO: find failing test
     size_t n = grid.size();
     if (n == 1) return "YES";
-    string s = grid[0];
-    sort(s.begin(), s.end());
+    string s0 = grid[0];
+    sort(s0.begin(), s0.end());
+    size_t m = s0.end() - s0.begin();
     for (size_t i = 1; i < n; i++) {
         string si =  grid[i];
         sort(si.begin(), si.end());
-        if (s > si) return "NO";
-        s = si;
+        for (size_t j = 0; j < m; j++) {
+            if (s0[j] > si[j]) return "NO";
+        }
+        s0 = si;
     }
     return "YES";
 }

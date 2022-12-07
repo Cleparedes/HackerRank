@@ -5,9 +5,14 @@ using namespace std;
 int pairs(int k, vector<int> arr) {
     size_t n = arr.size();
     int pairs = 0;
-    for (size_t i = 0; i < n-1; i++) {
+    sort(arr.begin(), arr.end());
+    for (size_t i = 0; i < n; i++) {
         for (size_t j = i; j < n; j++) {
-            if (arr[i] - arr[j] == k || arr[j] - arr[i] == k) pairs++; 
+            if (arr[j] - arr[i] == k) {
+                pairs++;
+                continue;
+            }
+            if (arr[j] - arr[i] > k) break;
         }
     }
     return pairs;

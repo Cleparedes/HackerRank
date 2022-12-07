@@ -6,24 +6,19 @@ using namespace std;
 string isBalanced(string s) {
     stack<char> stack;
     for (size_t i = 0; i < s.size(); i++) {
-        switch (s[i]) {
-            case ')':
-                if (!stack.empty() && stack.top() == '(') stack.pop();
-                else return "NO";
-                break;
-            case '}':
-                if (!stack.empty() && stack.top() == '{') stack.pop();
-                else return "NO";
-                break;
-            case ']':
-                if (!stack.empty() && stack.top() == '[') stack.pop();
-                else return "NO";
-                break;
-            default:
-                stack.push(s[i]);
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[') stack.push(s[i]);
+        else {
+            if (stack.empty()) return "NO";
+            char top = stack.top();
+            stack.pop();
+            if (top == '(' && s[i] == ')') continue;
+            if (top == '{' && s[i] == '}') continue;
+            if (top == '[' && s[i] == ']') continue;
+            return "NO";
         }
     }
-    return "YES";
+    if (stack.empty()) return "YES";
+    return "NO";
 }
 
 int main() {
